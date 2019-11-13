@@ -1,0 +1,53 @@
+
+<div class="col s6">
+    <div class="input-field inline">
+        <i class="material-icons prefix">date_range</i>
+        <input type="text" class="datepicker" id = "start_date">
+        <label for="start_date" data-error="" data-success="">Ngày bắt đầu</label>
+    </div>
+</div>
+<div class="col s6">
+    <div class="input-field inline">
+        <i class="material-icons prefix">date_range</i>
+        <input type="text" class="datepicker" id = "end_date">
+        <label for="end_date" data-error="" data-success="">Ngày kết thúc</label>
+    </div>
+</div>
+<div class="col s12">
+
+    <div class="input-field inline">
+        <i class="material-icons prefix">credit_card</i>
+        <input id="locker" type="text" class="validate " required>
+        <label for="locker" data-error="Số thẻ không được có chữ cái" data-success="">Mã số thẻ</label>
+    </div>
+
+    <br>
+</div>
+<div class="input-field col s12" id="room_select">
+
+</div>
+<script>
+    var rooms = [];
+    $.ajax({
+        url: "api/room_manager.php?action=getAvailableRoom",
+        async: false,
+        success: function(result){
+            rooms = JSON.parse(result);
+            var selection ="<select>        " +
+                    "<option value=\"\" disabled selected>Chọn phòng</option>";
+            for(var level=1; level <=3;level++){
+                selection += "<optgroup label=\"Tầng " + level + "\">";
+                for (var i = 0 ; i<rooms.length;i++) {
+                    var room = rooms[i];
+                    if (room.level == level) {
+                        selection += "<option value=\"" + room.room_number + "\">" + room.room_number + "</option>";
+                    }
+                }
+                selection += "</optgroup>";
+            }
+            selection +="</select>    <label>Chọn phòng</label>";
+            $("#room_select").html(selection);
+        },
+        method: "get"
+    });
+</script>
