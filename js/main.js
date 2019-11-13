@@ -81,16 +81,18 @@ $(window).on('load', function() {
             var selection1 ="<div class=\"hero-section\" >\n";
             var selection2 ="<div class=\"hero-section\" >\n";
             var maxRow = 5;
+            var setRoomNumber = [];
+            var setRoom = [];
+            for (var  i  = 0 ; i < images.length; i++){
+                var image = images[i];
+                if (setRoomNumber.indexOf(image.room) >= 0) continue;
+                setRoomNumber.push(image.room);
+                setRoom.push(image);
+            }
             if (window.innerWidth < 600){
-            	maxRow = 1;
-
-                var set = [];
                 var i = 0;
-
-                for ( ; i<images.length/2; i++) {
-                    var image = images[i];
-                    if (set.indexOf(image.room) >= 0) continue;
-                    set.push(image.room);
+                for ( ; i<setRoom.length/2; i++) {
+                    var image = setRoom[i];
 					selection1 += "<div class=\"hero-slider owl-carousel\">";
                     selection1 += "<div class=\"hero-item portfolio-item set-bg\" data-setbg=\"" + image.img + "\">";
                     selection1 += "            <a class=\"hero-link\">\n" +
@@ -98,10 +100,8 @@ $(window).on('load', function() {
                         "            </a></div></div>"
                 }
                 selection1 += "</div>";
-                for ( ; i<images.length; i++) {
-                    var image = images[i];
-                    if (set.indexOf(image.room) >= 0) continue;
-                    set.push(image.room);
+                for ( ; i<setRoom.length; i++) {
+                    var image = setRoom[i];
                     selection2 += "<div class=\"hero-slider owl-carousel\">";
                     selection2 += "<div class=\"hero-item portfolio-item set-bg\" data-setbg=\"" + image.img + "\">";
                     selection2 += "            <a class=\"hero-link\">\n" +
