@@ -26,3 +26,5 @@ The staff/admin can view the detail of the booking by clicking to each room in t
 # 7. Report
   The admin can view the report of all services includes the rental fee and deposit. The user can select the range of the date and the service they want to view and generate the report.
   If admin can export the report to the excel file or pdf file.
+# 8. List of customers
+  The admin can view the list of images of customers. The images will be displayed in grid. When click/touch to the image, the information of that customer such as room number and name will be popup.
